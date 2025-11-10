@@ -37,14 +37,7 @@ body {
 }
 
 body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background: radial-gradient(ellipse at 60% 30%, #38bdf844 0%, transparent 70%),
-                url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Ccircle cx="50" cy="50" r="48" stroke="%2338bdf844" stroke-width="2" fill="none"/%3E%3C/svg%3E') repeat;
-    opacity: 0.85;
+    display: none;
 }
 
 .container {
@@ -206,15 +199,7 @@ body::before {
 }
 
 .hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><circle cx="50" cy="50" r="40" stroke="rgba(255,255,255,0.1)" stroke-width="2" fill="none"/></svg>') repeat;
-    opacity: 0.1;
-    animation: rotate 20s linear infinite;
+    display: none;
 }
 
 .hero-content {
@@ -243,10 +228,9 @@ body::before {
     border-radius: 50%;
     border: 4px solid var(--primary-color);
     margin-bottom: 1.5rem;
-    box-shadow: 0 0 32px 0 rgba(56, 189, 248, 0.3), 0 0 0 8px rgba(24, 30, 41, 0.8);
+    box-shadow: 0 8px 24px rgba(56, 189, 248, 0.3);
     background: var(--card-bg);
     object-fit: cover;
-    animation: avatar-glow 2.5s infinite alternate;
 }
 
 .badge-container {
@@ -403,28 +387,21 @@ body::before {
 }
 
 .section {
-    padding: 8rem 0;
+    padding: 6rem 0;
     position: relative;
     overflow: hidden;
     background: var(--card-bg);
-    border-radius: 1.2rem;
-    margin: 3rem 0;
-    box-shadow: 0 4px 32px 0 #0002;
+    border-radius: 0;
+    margin: 0;
+    box-shadow: none;
     color: var(--text-color);
-    border: 1px solid var(--border-color);
+    border: none;
+    border-top: 1px solid var(--border-color);
     scroll-margin-top: 80px;
 }
 
 .section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><circle cx="50" cy="50" r="40" stroke="rgba(37,99,235,0.1)" stroke-width="2" fill="none"/></svg>') repeat;
-    opacity: 0.1;
-    animation: rotate 30s linear infinite;
+    display: none;
 }
 
 .section.dark {
@@ -443,14 +420,14 @@ body::before {
 }
 
 h2 {
-    font-size: 2rem;
-    margin-bottom: 2.5rem;
+    font-size: 2.2rem;
+    margin-bottom: 3rem;
     text-align: center;
     position: relative;
-    display: inline-block;
-    left: 50%;
-    transform: translateX(-50%);
-    text-shadow: 0 2px 16px #2563eb33;
+    display: block;
+    text-shadow: none;
+    color: var(--white);
+    font-weight: 600;
 }
 
 h2::after {
@@ -511,6 +488,71 @@ h2::after {
     border: 2px solid var(--primary-color);
 }
 
+/* 技能區塊樣式 */
+.skills-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.skill-category {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.skill-category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    border-color: var(--primary-color);
+}
+
+.skill-category h3 {
+    color: var(--primary-color);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.skill-category h3 i {
+    font-size: 1.4rem;
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.skill-tag {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(56, 189, 248, 0.1);
+    color: var(--text-light);
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.skill-tag:hover {
+    background: rgba(56, 189, 248, 0.2);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+/* 舊的技能樣式（保留以防萬一） */
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -521,39 +563,27 @@ h2::after {
 .skill-category {
     background: var(--card-bg);
     padding: 2rem 1.5rem;
-    border-radius: 1.2rem;
+    border-radius: 12px;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
     border: 1px solid var(--border-color);
-    box-shadow: 0 4px 32px 0 #0002;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     color: var(--text-color);
     font-family: 'Poppins', 'Montserrat', 'Inter', 'Noto Sans TC', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    min-height: 320px;
+    min-height: 280px;
 }
 
 .skill-category::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-    transform: translateX(-100%);
-    transition: transform 0.6s ease;
-}
-
-.skill-category:hover::before {
-    transform: translateX(100%);
+    display: none;
 }
 
 .skill-category:hover {
-    transform: translateY(-8px) scale(1.03);
-    box-shadow: 0 8px 32px #2563eb33;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     border-color: var(--primary-color);
 }
 
@@ -621,43 +651,37 @@ h2::after {
 
 .service-card {
     background: var(--card-bg);
-    padding: 3rem 2rem;
-    border-radius: 1.2rem;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
     text-align: center;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
     border: 1px solid var(--border-color);
-    box-shadow: 0 2px 16px #0002;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     color: var(--text-color);
     font-family: 'Montserrat', 'Poppins', sans-serif;
 }
 
 .service-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: var(--gradient-2);
+    display: none;
 }
 
 .service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    border-color: var(--primary-color);
 }
 
 .service-card i {
-    font-size: 3rem;
+    font-size: 2.5rem;
     color: var(--primary-color);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
     transition: transform 0.3s ease;
 }
 
 .service-card:hover i {
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 .service-card h3 {
@@ -685,45 +709,34 @@ h2::after {
 
 .pricing-card {
     background: var(--card-bg);
-    padding: 3rem 2rem;
-    border-radius: 1.2rem;
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
     text-align: center;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
     border: 1px solid var(--border-color);
-    box-shadow: 0 2px 16px #0002;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     color: var(--text-color);
     font-family: 'Montserrat', 'Poppins', sans-serif;
 }
 
 .pricing-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-    transform: translateX(-100%);
-    transition: transform 0.6s ease;
-}
-
-.pricing-card:hover::before {
-    transform: translateX(100%);
+    display: none;
 }
 
 .pricing-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    border-color: var(--primary-color);
 }
 
 .price {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: 700;
     color: var(--primary-color);
-    margin: 1.5rem 0;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    margin: 1.2rem 0;
+    text-shadow: none;
 }
 
 .pricing-card ul {
@@ -998,99 +1011,8 @@ footer::before {
     box-shadow: 0 8px 32px #38bdf899;
 }
 
-.main-skill-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.main-skill-block {
-    background: #20263a;
-    border-radius: 1.3rem;
-    box-shadow: 0 4px 32px 0 #0002;
-    border: 1.5px solid var(--border-color);
-    overflow: hidden;
-}
-
-.main-skill-title {
-    display: flex;
-    align-items: center;
-    padding: 1.5rem;
-    cursor: pointer;
-    user-select: none;
-    -webkit-user-select: none;
-    background: #20263a;
-    transition: all 0.3s ease;
-}
-
-.main-skill-title i:first-child {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    margin-right: 1rem;
-}
-
-.main-skill-title span {
-    flex: 1;
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    font-family: 'Montserrat', 'Poppins', sans-serif;
-}
-
-.main-skill-title i:last-child {
-    color: var(--primary-color);
-    transition: transform 0.3s ease;
-}
-
-.main-skill-block.active .main-skill-title i:last-child {
-    transform: rotate(180deg);
-}
-
-.skill-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-}
-
-.main-skill-block.active .skill-content {
-    max-height: 500px;
-}
-
-.devops-skill-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding: 0 1.5rem 1.5rem 1.5rem;
-}
-
-.devops-skill-item span {
-    display: flex;
-    align-items: center;
-    background: rgba(56, 189, 248, 0.1);
-    color: var(--primary-color);
-    border-radius: 1.2rem;
-    padding: 0.5rem 1.5rem 0.5rem 1.1rem;
-    font-size: 1.15rem;
-    font-family: 'Montserrat', 'Poppins', sans-serif;
-    font-weight: 700;
-    transition: all 0.3s ease;
-}
-
-.devops-skill-item span i {
-    margin-right: 0.7rem;
-    font-size: 1.4rem;
-}
-
-.devops-skill-item span:hover {
-    background: var(--primary-color);
-    color: #fff;
-    transform: translateY(-2px);
-}
-
-.main-skill-block:hover {
-    border-color: var(--primary-color);
-    box-shadow: 0 8px 32px #38bdf822;
-}
+/* 舊的技能區塊樣式（已棄用，改用 skills-wrapper） */
+/* .main-skill-list, .main-skill-block, .main-skill-title 等樣式已移除 */
 
 .timeline {
     position: relative;
@@ -1128,14 +1050,16 @@ footer::before {
     justify-content: center;
     font-size: 1.3rem;
     color: var(--primary-color);
-    box-shadow: 0 0 16px #38bdf855;
-    transition: background 0.2s, color 0.2s, border 0.2s;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+    transition: background 0.3s, color 0.3s, border 0.3s;
     z-index: 2;
-    animation: timeline-dot-glow 2.5s infinite alternate;
 }
-@keyframes timeline-dot-glow {
-    0% { box-shadow: 0 0 16px #38bdf855; }
-    100% { box-shadow: 0 0 32px #38bdf8cc; }
+
+.timeline-item:hover .timeline-dot {
+    background: var(--primary-color);
+    color: #fff;
+    border-color: #fff;
+    box-shadow: 0 0 16px rgba(56, 189, 248, 0.5);
 }
 .timeline-content {
     background: #20263a;
@@ -1185,9 +1109,9 @@ footer::before {
         padding: 0 20px;
     }
     
-    .main-skill-list {
+    .skills-wrapper {
         grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
+        gap: 1.5rem;
     }
 }
 
@@ -1237,8 +1161,9 @@ footer::before {
 }
 
 @media screen and (max-width: 768px) {
-    .main-skill-list {
+    .skills-wrapper {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .services-grid {
@@ -1281,8 +1206,13 @@ footer::before {
         grid-template-columns: 1fr;
     }
 
-    .devops-skill-list {
-        grid-template-columns: repeat(2, 1fr);
+    .skill-tags {
+        gap: 0.5rem;
+    }
+
+    .skill-tag {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
     }
 
     .timeline::before {
@@ -1339,29 +1269,36 @@ html {
     flex-direction: column;
     align-items: center;
     background: var(--card-bg);
-    border-radius: 1.2rem;
-    box-shadow: 0 4px 32px 0 #2563eb33;
-    padding: 2.5rem 2rem 2rem 2rem;
-    border: 1.5px solid var(--primary-color);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem 2rem;
+    border: 1px solid var(--border-color);
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
 }
+
 .contact-form-embed .form-desc {
-    color: var(--primary-color);
-    font-size: 1.15rem;
-    font-weight: 600;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    font-weight: 500;
     margin-bottom: 1.5rem;
     text-align: center;
-    letter-spacing: 0.04em;
+    line-height: 1.6;
 }
+
+.contact-form-embed .form-btn {
+    font-size: 1.1rem;
+    margin-top: 1rem;
+}
+
 .contact-form-embed iframe {
     width: 100%;
     min-height: 700px;
     border: none;
-    border-radius: 1rem;
+    border-radius: 8px;
     background: #181f2a;
-    box-shadow: 0 2px 16px #2563eb22;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     margin: 0 auto;
     display: block;
 }
@@ -1657,10 +1594,62 @@ body.loaded .hero-content {
 }
 
 /* 更新關於區塊樣式 */
-.about-content p {
-    margin-bottom: 1.5rem;
+.about-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.about-intro {
+    margin-bottom: 3rem;
+}
+
+.about-intro p {
+    margin-bottom: 1.2rem;
     line-height: 1.8;
     font-size: 1.05rem;
+    color: var(--text-light);
+}
+
+.about-features,
+.about-experience {
+    margin-bottom: 2.5rem;
+}
+
+.about-features h3,
+.about-experience h3 {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+    position: relative;
+    padding-left: 0;
+}
+
+.feature-list,
+.experience-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.feature-list li,
+.experience-list li {
+    padding: 0.8rem 1rem;
+    background: rgba(56, 189, 248, 0.05);
+    border-left: 3px solid var(--primary-color);
+    border-radius: 6px;
+    color: var(--text-light);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    line-height: 1.6;
+}
+
+.feature-list li:hover,
+.experience-list li:hover {
+    background: rgba(56, 189, 248, 0.1);
+    transform: translateX(5px);
 }
 
 /* 更多新樣式 ... */ 
